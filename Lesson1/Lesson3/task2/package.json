@@ -7,10 +7,11 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "build:styles": "sass ./src/styles/index.scss ./dist/styles/index.css",
-    "copy:html": "cp ./src/index.html ./dist/index.html",
-    "build:scripts": "babel ./src --out-dir=./dist",
-    "clean": "rm -rf ./dist",
-    "build": "npm-run-all clean build:* copy:*"
+    "copy:html": "copy src\\index.html dist\\index.html",
+    "transpile:scripts": "babel ./src --out-dir=./temp",
+    "build:scripts": "webpack ./temp/scripts/index.js -p",
+    "clean": "rmdir /s  dist ",
+    "build": "npm-run-all transpile:scripts  build:* copy:*"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,8 @@
     "sass": "^1.42.1"
   },
   "dependencies": {
-    "core-js": "^3.18.1"
+    "core-js": "^3.18.0",
+    "webpack": "^5.54.0",
+    "webpack-cli": "^4.8.0"
   }
 }
